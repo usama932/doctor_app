@@ -1,0 +1,186 @@
+<?php $page = "index-13"; ?>
+@extends('layout.mainlayout_index1')
+@section('title', 'Make Appointment')
+@section('content')
+    <!-- Header -->
+    @include('components.patient_header')
+    <!-- /Header -->
+
+    <div class="row align-items-center mt-4">
+
+    </div>
+    </div>
+    </section>
+    <!-- /Home Banner -->
+    <section class="create-appointment">
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="booking-doc-info">
+                                    <a href="{{url('doctor-profile')}}" class="booking-doc-img">
+                                        @if($doctor->profile_image ?? '')
+                                            <img src="{{ asset('storage/images/'. $doctor->profile_image) }}"
+                                                 alt="User Image">
+                                        @else
+                                            <img src="{{ URL::asset('/assets/img/doctors/doctor-thumb-02.jpg')}}"
+                                                 alt="User Image">
+                                        @endif
+                                    </a>
+                                    <div class="booking-info">
+                                        <h4><a href="{{url('doctor-profile')}}">Dr. {{ $doctor->name }}</a></h4>
+                                        <div class="rating">
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span class="d-inline-block average-rating">35</span>
+                                        </div>
+                                        <p class="text-muted mb-0"><i
+                                                class="fas fa-map-marker-alt"></i> {{ $doctor->address }},
+                                            {{ $doctor->state }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-sm-4 col-md-6">
+                                <h4 class="mb-1">{{ $date->format('l, F jS Y') }}</h4>
+                                <p class="text-muted"></p>
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-6 text-end">
+                                <div class="bookingrange btn btn-white btn-sm mb-3">
+                                    <i class="far fa-calendar-alt me-2"></i>
+                                    <span></span>
+                                    <i class="fas fa-chevron-down ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Schedule Widget -->
+                        <div class="card booking-schedule schedule-widget">
+
+                            <form action="{{ route('store_appointment') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
+                                <input type="hidden" name="patient_id" value="{{ auth()->id() }}">
+                                <input type="hidden" name="hospital_id" value="{{ $doctor->hospital_id }}">
+                                <input type="hidden" name="status" value="P">
+                            <!-- Schedule Header -->
+                            <div class="schedule-header">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- Day Slot -->
+                                        <div class="day-slot">
+                                            <ul>
+{{--                                                <li class="left-arrow">--}}
+{{--                                                    <a href="">--}}
+{{--                                                        <i class="fa fa-chevron-left"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
+                                                @for($i = 0; $i<=6; $i++)
+                                                    <li>
+                                                        <span>{{ $date->startOfWeek()->addDays($i)->format('l') }} </span>
+                                                        <label class="slot-date"
+                                                               for="appointment_date_{{$i}}_{{ $date->format('d/m/Y') }}">
+                                                            <input type="radio"
+                                                                   name="appointment_date"
+                                                                   value="{{ $date }}"
+                                                                   id="appointment_date_{{$i}}_{{ $date->format('d/m/Y') }}">
+                                                            {{ $date->format('d/m/Y') }}
+                                                        </label>
+{{--                                                        <span class="slot-date">{{ $date->format('d/m/Y') }}</span>--}}
+                                                    </li>
+                                                @endfor
+{{--                                                <li class="right-arrow">--}}
+{{--                                                    <a href="">--}}
+{{--                                                        <i class="fa fa-chevron-right"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
+                                            </ul>
+                                        </div>
+                                        <!-- /Day Slot -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Schedule Header -->
+
+                            <!-- Schedule Content -->
+                            <div class="schedule-cont">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <!-- Time Slot -->
+                                        <div class="time-slot">
+                                            <ul class="clearfix">
+                                                @for($i = 0; $i <=6; $i++)
+
+                                                    <li>
+                                                        @if($doctor->schedules[$i]->from ?? '')
+                                                            @foreach($intervals as $interval)
+{{--                                                                selected class for selected radio--}}
+                                                            @if(\App\Models\Appointment::query()->where('appointment_time', $interval)->where('doctor_id', $doctor->id)->exists())
+                                                                    <label class="btn btn-secondary timing"
+                                                                           for="appointment_time_{{$i}}_{{ $interval->format('d_h_i') }}">
+                                                                        <input type="radio"
+                                                                               disabled
+                                                                               name="appointment_time"
+                                                                               value="{{  $interval }}"
+                                                                               id="appointment_time_{{$i}}_{{ $interval->format('d_h_i') }}">
+                                                                        {{  $interval->format("H:i a") }}
+                                                                    </label>
+                                                                @else
+                                                                <label class="btn btn-secondary timing"
+                                                                       for="appointment_time_{{$i}}_{{ $interval->format('d_h_i') }}">
+                                                                    <input type="radio"
+                                                                           name="appointment_time"
+                                                                           value="{{  $interval }}"
+                                                                           id="appointment_time_{{$i}}_{{ $interval->format('d_h_i') }}">
+                                                                    {{  $interval->format("H:i a") }}
+                                                                </label>
+                                                                @endif
+{{--                                                                <a class="timing"--}}
+{{--                                                                   href="#">--}}
+{{--                                                                    <span>{{  $interval->format("H:i") }}</span>--}}
+{{--                                                                </a>--}}
+                                                            @endforeach
+                                                        @else
+                                                            <span> No Schedule found</span>
+                                                        @endif
+                                                    </li>
+                                                @endfor
+                                            </ul>
+                                        </div>
+                                        <!-- /Time Slot -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Schedule Content -->
+
+                        </div>
+                        <!-- /Schedule Widget -->
+
+                        <!-- Submit Section -->
+                        <div class="submit-section proceed-btn text-end">
+                            <button type="submit" class="btn btn-primary submit-btn">Book Appointment</button>
+                        </div>
+                        <!-- /Submit Section -->
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+    </section>
+    <!-- /Page Content -->
+
+@endsection
+
