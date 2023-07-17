@@ -23,6 +23,7 @@ use App\Http\Controllers\Patient\AppointmentController;
 use App\Http\Controllers\Patient\DashboardController as PatientDashboardController;
 use App\Http\Controllers\Patient\ReviewController;
 use App\Http\Controllers\Patient\ProfileController as PatientProfile;
+use App\Http\Controllers\LangController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'welcome']);
@@ -185,6 +186,10 @@ Route::middleware(['auth'])->group(function () {
         ->name("invoice.change.payment.status")->can("changePaymentStatus", "invoice");
     // Patient Dashboard
     Route::get('patient-dashboard', [PatientDashboardController::class, "index"])->name('patient_dashboard');
+
+    //LAng
+
+    Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
 });
 
 require __DIR__ . '/auth.php';

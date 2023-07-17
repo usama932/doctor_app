@@ -35,7 +35,7 @@
 									<p>No matched Appointment found. <a href="{{url('specialities')}}"><span>View all</span></a></p>
 								</li>
 								<li>
-									<h6><i class="feather-user me-1"></i> Doctors</h6>
+									<h6><i class="feather-user me-1"></i> {{ __('message.doctors') }}</h6>
 									<p>No matched Appointment found. <a href="{{url('doctor-list')}}"><span>View all</span></a></p>
 								</li>
 								<li>
@@ -61,6 +61,18 @@
 						<i class="feather-sun light-mode"></i><i class="feather-moon dark-mode"></i>
 					</a>
 				</li>
+                <li class="nav-item">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <select class="form-control changeLang">
+                            <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                            <option value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+
+                        </select>
+                    </div>
+                </div>
+                </li>
 				<!-- /Flag -->
 				<!-- Notifications -->
 				<li class="nav-item dropdown noti-nav">

@@ -96,7 +96,7 @@
                     </ul>
                 </li>
                 <li class="menu-title">
-                    <span>Settings</span>
+                    <span>{{ __('messages.settings') }}</span>
                 </li>
                 <li class="{{ Request::routeIs('invoice-settings.*') ? 'active' : '' }}">
                     <a href="{{ route('invoice-settings') }}"><i class="feather-user"></i> <span>Invoice Settings</span></a>

@@ -31,6 +31,15 @@
 	    <script src="{{ URL::asset('/assets_admin/js/owl.carousel.min.js')}}"></script>
 		<!-- Custom JS -->
 		<script src="{{ URL::asset('/assets_admin/js/app.js')}}"></script>
+        <script type="text/javascript">
+
+            var url = "{{ route('changeLang') }}";
+
+            $(".changeLang").change(function(){
+                window.location.href = url + "?lang="+ $(this).val();
+            });
+
+        </script>
         @stack("scripts")
 
 
