@@ -1,3 +1,13 @@
+@php
+if(!empty(Session::get('locale')))
+    {
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp<!-- Main Wrapper -->
 @extends('layout.mainlayout_admin')
 @section('title', 'Dashboard')
 @section('content')
@@ -17,7 +27,7 @@
 											<i class="feather-user-plus"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h5 class="dash-title">Hospitals</h5>
+                                    <h5 class="dash-title"> {{ __('message.Hospitals') }}</h5>
                                     <div class="dash-counts">
                                         <p>{{ $hospitalCount }}</p>
                                     </div>
@@ -35,7 +45,7 @@
 											<i class="feather-user-plus"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h5 class="dash-title">Specialities</h5>
+                                    <h5 class="dash-title">{{ __('message.Specialities') }}</h5>
                                     <div class="dash-counts">
                                         <p>{{ $specialityCount }}</p>
                                     </div>
@@ -53,7 +63,7 @@
 											<i class="feather-user-plus"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h5 class="dash-title">Doctors</h5>
+                                    <h5 class="dash-title"> {{ __('message.doctors') }}</h5>
                                     <div class="dash-counts">
                                         <p>{{ $doctorCount }}</p>
                                     </div>
@@ -71,7 +81,7 @@
 											<i class="feather-users"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h5 class="dash-title">Patients</h5>
+                                    <h5 class="dash-title"> {{ __('message.Patients') }}</h5>
                                     <div class="dash-counts">
                                         <p>{{ $patientCount }}</p>
                                     </div>
@@ -90,7 +100,7 @@
                                                  alt="User Image">
 										</span>
                                 <div class="dash-count">
-                                    <h5 class="dash-title">Appointment</h5>
+                                    <h5 class="dash-title"> {{ __('message.Appointments') }}</h5>
                                     <div class="dash-counts">
                                         <p>{{$appointmentCount}}</p>
                                     </div>
@@ -109,7 +119,7 @@
                                                  alt="User Image">
 										</span>
                                 <div class="dash-count">
-                                    <h5 class="dash-title">Revenue</h5>
+                                    <h5 class="dash-title">{{ __('message.Revenue') }}</h5>
                                     <div class="dash-counts">
                                         <p>{{number_format($totalRevenue->total_fee, 2)}}</p>
                                     </div>
@@ -125,7 +135,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="section-heading">
-                        <h5 class="mb-0">Today’s Appointment <span class="num-circle">{{$todayAppointments->count()}}</span></h5>
+                        <h5 class="mb-0">{{ __('message.Today’s') }} {{ __('message.Appointments') }} <span class="num-circle">{{$todayAppointments->count()}}</span></h5>
                     </div>
                 </div>
                 <div class="col-md-6 text-end">
@@ -170,7 +180,7 @@
                                     </div>
                                     <div class="app-info">
                                         <div>
-                                            <p>Today</p>
+                                            <p>{{ __('message.Today’s') }}</p>
                                             <h6>{{ date('h:i A', strtotime($appointment->appointment_time)) }}</h6>
                                         </div>
                                         <div>
@@ -203,7 +213,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h5 class="card-title">Appointments</h5>
+                                    <h5 class="card-title">{{ __('message.Appointments') }}</h5>
                                 </div>
                                 <div class="col-auto d-flex">
                                     <select class="select">
@@ -232,7 +242,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h5 class="card-title">Income Report</h5>
+                                    <h5 class="card-title">{{ __('message.Income') }} {{ __('message.Report') }}</h5>
                                 </div>
                                 <div class="col-auto d-flex">
                                     <select class="select">

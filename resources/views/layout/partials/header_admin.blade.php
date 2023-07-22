@@ -33,23 +33,23 @@ if(!empty(Session::get('locale')))
 				<div class="main">
 						<form class="search" method="post" action="index_admin" >
 							<div class="s-icon"><i class="fas fa-search"></i></div>
-							<input type="text" class="form-control" placeholder="Start typing your Search..." />
+							<input type="text" class="form-control" placeholder="{{ __('message.Start_typing_your_Search') }}..." />
 							<ul class="results">
 								<li>
-									<h6><i class="feather-calendar me-1"></i> Appointments</h6>
-									<p>No matched Appointment found. <a href="{{url('upcoming-appointments')}}"><span>View all</span></a></p>
+									<h6><i class="feather-calendar me-1"></i> {{ __('message.Appointments') }}</h6>
+									<p>{{ __('message.No_matched_Appointment_found') }}. <a href="{{url('upcoming-appointments')}}"><span>{{ __('message.view_all') }}</span></a></p>
 								</li>
 								<li>
-									<h6><i class="feather-calendar me-1"></i> Specialities</h6>
-									<p>No matched Appointment found. <a href="{{url('specialities')}}"><span>View all</span></a></p>
+									<h6><i class="feather-calendar me-1"></i>  {{ __('message.Specialities') }}</h6>
+									<p>{{ __('message.No_matched_Appointment_found') }}. <a href="{{url('specialities')}}"><span>{{ __('message.view_all') }}</span></a></p>
 								</li>
 								<li>
 									<h6><i class="feather-user me-1"></i> {{ __('message.doctors') }}</h6>
-									<p>No matched Appointment found. <a href="{{url('doctor-list')}}"><span>View all</span></a></p>
+									<p>{{ __('message.No_matched_Appointment_found') }}. <a href="{{url('doctor-list')}}"><span>{{ __('message.view_all') }}</span></a></p>
 								</li>
 								<li>
-									<h6><i class="feather-users me-1"></i> Patients</h6>
-									<p>No matched Appointment found. <a href="{{url('patient-list')}}"><span>View all</span></a></p>
+									<h6><i class="feather-users me-1"></i> {{ __('message.Patients') }}</h6>
+									<p>{{ __('message.No_matched_Appointment_found') }}. <a href="{{url('patient-list')}}"><span>{{ __('message.view_all') }}</span></a></p>
 								</li>
 							</ul>
 						</form>
@@ -90,12 +90,12 @@ if(!empty(Session::get('locale')))
 					</a>
 					<div class="dropdown-menu notifications">
 						<div class="topnav-dropdown-header">
-							<span class="notification-title">Notifications</span>
+							<span class="notification-title">{{ __('message.Notifications') }}</span>
 							<a href="javascript:void(0)" class="clear-noti"><i class="feather-more-vertical"></i></a>
 						</div>
 						<div class="noti-content">
 							<ul class="notification-list">
-									<li class="notification-message">
+									{{-- <li class="notification-message">
 										<a href="#">
 											<div class="media d-flex">
 												<span class="avatar">
@@ -107,46 +107,8 @@ if(!empty(Session::get('locale')))
 												</div>
 											</div>
 										</a>
-									</li>
-									<li class="notification-message">
-										<a href="#">
-											<div class="media d-flex">
-												<span class="avatar">
-													<img class="avatar-img" alt="" src="{{ URL::asset('/assets_admin/img/profiles/avatar-05.jpg')}}">
-												</span>
-												<div class="media-body">
-													<h6>Travis Tremble <span class="notification-time">12 Min Ago</span></h6>
-													<p class="noti-details"> has booked her appointment to  <span class="noti-title">Dr. Hendry Watt</span></p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="#">
-											<div class="media d-flex">
-												<div class="avatar">
-													<img class="avatar-img" alt="" src="{{ URL::asset('/assets_admin/img/profiles/avatar-03.jpg')}}">
-												</div>
-												<div class="media-body">
-													<h6>Travis Tremble <span class="notification-time">6 Min Ago</span></h6>
-													<p class="noti-details"> Sent a amount  $210 for his Appointment   <span class="noti-title">Dr.Maria Dyen</span></p>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="notification-message">
-										<a href="#">
-											<div class="media d-flex">
-												<div class="avatar avatar-sm">
-													<img class="avatar-img" alt="" src="{{ URL::asset('/assets_admin/img/profiles/avatar-06.jpg')}}">
-												</div>
-												<div class="media-body">
-													<h6>Travis Tremble <span class="notification-time">8.30 AM</span></h6>
-													<p class="noti-details"> Send a message to his doctor</p>
-												</div>
-											</div>
-										</a>
-									</li>
+									</li> --}}
+
 								</ul>
 						</div>
 					</div>
@@ -181,9 +143,9 @@ if(!empty(Session::get('locale')))
                                     @endauth
 								</div>
 							</div>
-							<a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="feather-user me-1"></i> My Profile</a>
-							<a class="dropdown-item" href="{{ route('admin.profile.edit') }}"><i class="feather-edit me-1"></i> Edit Profile</a>
-							<a class="dropdown-item" href="{{route('admin.password.edit')}}"><i class="feather-lock me-1"></i> Change Password</a>
+							<a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="feather-user me-1"></i> {{ __('message.My_Profile') }}</a>
+							<a class="dropdown-item" href="{{ route('admin.profile.edit') }}"><i class="feather-edit me-1"></i> {{ __('message.Edit_Profile') }} </a>
+							<a class="dropdown-item" href="{{route('admin.password.edit')}}"><i class="feather-lock me-1"></i>{{ __('message.Change_Password') }} </a>
 							<hr class="my-0 ms-2 me-2">
 							<a
                                 onclick="document.getElementById('formlogout').submit();"
@@ -191,7 +153,7 @@ if(!empty(Session::get('locale')))
                                 href="#"
                             >
                                 <i class="feather-log-out me-1"></i>
-                                Logout
+                                {{ __('message.Logout') }}
                             </a>
                             <form id="formlogout" method="POST" action="{{ route('logout') }}">
                                 @csrf
