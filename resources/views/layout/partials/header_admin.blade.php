@@ -7,7 +7,7 @@ if(!empty(Session::get('locale')))
     else{
          app()->setLocale('en');
     }
-@endphp<!-- Main Wrapper -->
+@endphp
 	<div class="main-wrapper">
 
 		<!-- Header -->

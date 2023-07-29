@@ -1,23 +1,19 @@
 
 @php
+
 if(!empty(Session::get('locale')))
     {
+        $lang = Session::get('locale');
         app()->setLocale(Session::get('locale'));
-        if( Session::has('locale') == 'ar' )
-
-        {
-            echo "<!DOCTYPE html>";
-            echo ' <html lang="ar" dir="rtl" direction="rtl" style="direction:rtl;" >';
-        }
-
     }
 
     else{
          app()->setLocale('en');
-         echo "<!DOCTYPE html>";
-         echo '  <html lang="en">';
     }
-@endphp<!-- Main Wrapper -->
+@endphp
+
+
+<html @if($lang == 'ar') lang="ar" dir="rtl" direction="rtl" style="direction:rtl;" @endif>
 
   <head>
     @include('layout.partials.head_admin')
