@@ -2,6 +2,16 @@
     use Illuminate\Support\Facades\Request;
     $setting = \App\Models\Settings::query()->first();
 @endphp
+@php
+if(!empty(Session::get('locale')))
+    {
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
 <div class="main-wrapper">
     <!-- Home Banner -->
     <section class="home-four-banner" style="overflow: visible">
@@ -33,8 +43,20 @@
 {{--                                <li><a href="{{ $setting->instagram }}" target="_blank"><i class="fab fa-instagram hi-icon"></i></a></li>--}}
                                 <li><a href="{{ $setting->twitter ?? ''}}" target="_blank"><i class="fab fa-twitter hi-icon"></i></a></li>
                                 <li><a href="{{ $setting->youtube ?? ''}}" target="_blank"><i class="fab fa-youtube hi-icon"></i></a></li>
+                                <li>
+
+                                    <select class="form-control changeLang">
+                                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                        <option value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
+
+                                    </select>
+                                </li>
                             </ul>
+
                         </div>
+
+
+
                     </div>
                 </div>
             </div>
@@ -84,21 +106,21 @@
                             <ul class="main-nav black-font grey-font mx-4">
                                 @auth
                                     <li class="{{ Request::routeIs('home') ? 'active' : '' }}">
-                                        <a href="{{ route('home') }}">Home</a>
+                                        <a href="{{ route('home') }}">{{ __('message.Home') }}</a>
                                     </li>
                                 @else
                                     <li class="{{ Request::routeIs('/') ? 'active' : '' }}">
-                                        <a href="/">Home</a>
+                                        <a href="/">{{ __('message.Home') }}</a>
                                     </li>
                                 @endauth
                                 <li class="{{ Request::routeIs('blog-list') ? 'active' : '' }}">
-                                    <a href="{{ route('blog-list') }}">Blogs</a>
+                                    <a href="{{ route('blog-list') }}">{{ __('message.Blogs') }}</a>
                                 </li>
                                 <li class="{{ Request::routeIs('about-us') ? 'active' : '' }}">
-                                    <a href="{{ route('about-us') }}">About Us</a>
+                                    <a href="{{ route('about-us') }}">{{ __('message.about_us') }} </a>
                                 </li>
                                 <li class="{{ Request::routeIs('contact-us') ? 'active' : '' }}">
-                                    <a href="{{ route('contact-us') }}">Contact Us</a>
+                                    <a href="{{ route('contact-us') }}">{{ __('message.contact_us') }} </a>
                                 </li>
                                 @auth
                                 @php
@@ -108,7 +130,7 @@
                                     }
                                 @endphp
                                     <li class="{{ Request::routeIs($dashboardUrl) ? 'active' : '' }}">
-                                        <a href="{{ url($dashboardUrl) }}">Dashboard</a>
+                                        <a href="{{ url($dashboardUrl) }}">{{ __('message.Dashboard') }}</a>
                                     </li>
                                 @endauth
                             </ul>
@@ -145,7 +167,7 @@
                                                 <p class="text-muted mb-0">{{ auth()->user()->username }}</p>
                                             </div>
                                         </div>
-                                        <a class="dropdown-item" href="{{url($dashboardUrl)}}">Dashboard</a>
+                                        <a class="dropdown-item" href="{{url($dashboardUrl)}}">{{ __('message.Dashboard') }}</a>
                                         @php
                                             $profileUrl = "profile.index";
                                             if(auth()->user()->user_type == "D"){
@@ -156,7 +178,7 @@
                                                 $profileUrl = "admin.profile.edit";
                                             }
                                         @endphp
-                                        <a class="dropdown-item" href="{{ route($profileUrl) }}">Profile</a>
+                                        <a class="dropdown-item" href="{{ route($profileUrl) }}"> {{ __('message.Profile') }}</a>
                                         <a
                                             onclick="document.getElementById('formlogout').submit();"
                                             class="dropdown-item"
@@ -171,11 +193,10 @@
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link theme-btn btn-four" href="{{url('login')}}">Sign In</a>
+                                    <a class="nav-link theme-btn btn-four" href="{{url('login')}}">  {{ __('message.sign_in') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link theme-btn btn-four-light" href="{{url('register')}}">Sign
-                                        Up</a>
+                                    <a class="nav-link theme-btn btn-four-light" href="{{url('register')}}">  {{ __('message.sign_up') }}</a>
                                 </li>
                             @endauth
                             </ul>

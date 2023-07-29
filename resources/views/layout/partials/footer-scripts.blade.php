@@ -70,5 +70,13 @@
 			});
 
 		</script>
+
 		@endif
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            var url = "{{ route('changeLang') }}";
+            $(".changeLang").change(function(){
+                window.location.href = url + "?lang="+ $(this).val();
+            });
+        </script>
 @stack('scripts')

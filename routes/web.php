@@ -189,7 +189,7 @@ Route::middleware(['auth'])->group(function () {
 
     //LAng
 
-    Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
-});
 
+});
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
 require __DIR__ . '/auth.php';

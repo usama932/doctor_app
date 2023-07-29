@@ -1,3 +1,13 @@
+@php
+if(!empty(Session::get('locale')))
+    {
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
 <?php $page = "index-13"; ?>
 @extends('layout.mainlayout_index1')
 @section('title', 'Welcome')
@@ -10,7 +20,7 @@
         <div class="col-lg-7 col-md-12">
             <div class="home-four-doctor">
                 <div class="home-four-header">
-                    <h2>Search Doctor, Make an <span>Appointment</span></h2>
+                    <h2>{{ __('message.Search_Doctor_Make_an') }} <span>{{ __('message.Appointments') }}</span></h2>
                 </div>
                 <div class="banner-four-form">
                     <form method="GET" action="{{ route('search_doctor') }}" class="banner-four-search">
@@ -18,17 +28,17 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="text" name="search"  class="form-control" value="{{ request('search') }}"
-                                           placeholder="Search Location">
+                                           placeholder="{{ __('message.Search_Location') }}">
                                     <i class="far fa-compass"></i>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <select name="gender" class="select form-control">
-                                        <option value="M">Gender</option>
-                                        <option value="M">Male</option>
-                                        <option value="F">Female</option>
-                                        <option value="O">Other</option>
+                                        <option value="M">{{ __('message.Gender') }}</option>
+                                        <option value="M"> {{ __('message.Male') }}</option>
+                                        <option value="F"> {{ __('message.Female') }}</option>
+                                        <option value="O"> {{ __('message.Other') }}</option>
                                     </select>
                                     <i class="far fa-smile"></i>
                                 </div>
@@ -36,7 +46,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <select name="speciality_id" class="select form-control">
-                                        <option value="1">Department</option>
+                                        <option value="1"> {{ __('message.Departments') }}</option>
                                         @forelse($specialities as $speciality)
                                         <option value="{{ $speciality->id }}">{{ $speciality->name }}</option>
                                         @empty
@@ -49,7 +59,7 @@
                             <div class="col-md-6"></div>
                             <div class="col-md-6">
                                 <div class="form-group text-end mb-0">
-                                    <button type="submit" class="btn theme-btn btn-four w-100">SEARCH</button>
+                                    <button type="submit" class="btn theme-btn btn-four w-100"> {{ __('message.Search') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -94,5 +104,6 @@
             });
         })
     </script>
+
 @endpush
 

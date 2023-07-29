@@ -1,22 +1,32 @@
 @php
 $setting = \App\Models\Settings::query()->first();
 @endphp
+@php
+if(!empty(Session::get('locale')))
+    {
+        $lang = Session::get('locale');
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
 <!-- Footer Four -->
-<footer class="footer footer-four">
+<footer class="footer footer-four" @if($lang == 'ar') lang="ar" dir="rtl" direction="rtl" style="direction:rtl;" @endif>
     <div class="news-section-four">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="news-info">
-                        <h2>Subscribe to our Newsletter</h2>
-                        <p>Subscribe today for our exclusive offers, latest news and updates about health care
-                            programs.</p>
+                        <h2>{{ __('message.Subscribe to our Newsletter') }}</h2>
+                        <p>{{ __('message.letter_text') }}</p>
                     </div>
                     <div class="footer-news-four">
                         <form>
-                            <div class="form-group mb-0">
-                                <input type="text" class="form-control" placeholder="Enter Your Email Address">
-                                <button type="submit" class="btn btn-one">Subscribe</button>
+                            <div class="form-group mb-0 mx-auto">
+                                <input type="text" class="form-control mx-auto" placeholder="{{ __('message.Enter Your Email Address') }}">
+                                <button type="submit" class="btn btn-one">{{ __('message.subscribe') }}</button>
                             </div>
                         </form>
                     </div>
@@ -32,7 +42,7 @@ $setting = \App\Models\Settings::query()->first();
                 <div class="col-lg-4 col-md-6">
                     <!-- Footer Widget -->
                     <div class="footer-widget footer-contact">
-                        <h2 class="footer-title">Contact Us</h2>
+                        <h2 class="footer-title">{{ __('message.contact_us') }}</h2>
                         <div class="footer-contact-info">
                             <div class="footer-address"><span><i class="feather-map-pin"></i></span>
                                 <p>3556 Beech Street, San Francisco,
@@ -57,20 +67,20 @@ $setting = \App\Models\Settings::query()->first();
                         <div class="col-lg-4 col-md-6">
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patients</h2>
+                                <h2 class="footer-title">{{ __('message.For') }}  {{ __('message.Patients') }}</h2>
                                 <ul>
-                                    <li><a href="{{ route('search_doctor') }}">Search for Doctors</a>
+                                    <li><a href="{{ route('search_doctor') }}">{{ __('message.Search') }} {{ __('message.for') }} {{ __('message.Doctors') }} </a>
                                     </li>
                                     @auth
-                                        <li><a href="{{ route('profile.index') }}">My Profile</a>
+                                        <li><a href="{{ route('profile.index') }}">{{ __('message.my ') }}  {{ __('message.Profile ') }}</a>
                                         </li>
                                     @else
-                                        <li><a href="{{ route('login') }}">Login</a>
+                                        <li><a href="{{ route('login') }}">{{ __('message.sign_in') }}</a>
                                         </li>
-                                        <li><a href="{{ route('register') }}">Register</a>
+                                        <li><a href="{{ route('register') }}">{{ __('message.sign_up') }}</a>
                                         </li>
                                     @endauth
-                                    <li><a href="{{ route('patient_dashboard') }}">Patient Dashboard</a>
+                                    <li><a href="{{ route('patient_dashboard') }}">{{ __('message.Patients') }} {{ __('message.Dashboard') }} </a>
                                     </li>
                                 </ul>
                             </div>
@@ -80,13 +90,13 @@ $setting = \App\Models\Settings::query()->first();
                         <div class="col-lg-4 col-md-6">
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Doctors</h2>
+                                <h2 class="footer-title">{{ __('message.for') }} {{ __('message.Doctors') }}</h2>
                                 <ul>
-                                    <li><a href="{{url('appointments')}}">Appointments</a>
+                                    <li><a href="{{url('appointments')}}"> {{ __('message.Appointments') }}</a>
                                     </li>
                                     <li><a href="{{url('chat')}}">Chat</a>
                                     </li>
-                                    <li><a href="{{url('doctor-dashboard')}}">Doctor Dashboard</a>
+                                    <li><a href="{{url('doctor-dashboard')}}">  {{ __('message.Doctors') }} {{ __('message.Dashboard') }}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -97,15 +107,15 @@ $setting = \App\Models\Settings::query()->first();
                     <div class="col-lg-4 col-md-6">
                         <!-- Footer Widget -->
                         <div class="footer-widget footer-menu">
-                            <h2 class="footer-title">For Patients</h2>
+                            <h2 class="footer-title">   {{ __('message.for') }}  {{ __('message.Patients') }}</h2>
                             <ul>
-                                <li><a href="{{ route('search_doctor') }}">Search for Doctors</a>
+                                <li><a href="{{ route('search_doctor') }}">  {{ __('message.Search') }} {{ __('message.for') }}   {{ __('message.doctors') }}</a>
                                 </li>
-                                <li><a href="{{ route('login') }}">Login</a>
+                                <li><a href="{{ route('login') }}">  {{ __('message.sign_in') }} </a>
                                 </li>
-                                <li><a href="{{ route('register') }}">Register</a>
+                                <li><a href="{{ route('register') }}">  {{ __('message.sign_up') }} </a>
                                 </li>
-                                <li><a href="{{ route('patient_dashboard') }}">Patient Dashboard</a>
+                                <li><a href="{{ route('patient_dashboard') }}">   {{ __('message.Patients') }}  {{ __('message.Dashboard') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -116,15 +126,15 @@ $setting = \App\Models\Settings::query()->first();
                 <div class="col-lg-4 col-md-6">
                     <!-- Footer Widget -->
                     <div class="footer-widget footer-menu">
-                        <h2 class="footer-title">Social Network</h2>
+                        <h2 class="footer-title"> {{ __('message.Social Network') }}</h2>
                         <ul>
-                            <li><a href="#" target="_blank"><i class="fab fa-facebook me-2"></i> Facebook</a>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook me-2"></i>{{ __('message.Facebook') }} </a>
                             </li>
-                            <li><a href="#" target="_blank"><i class="fab fa-twitter me-2"></i> Twitter</a>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter me-2"></i>{{ __('message.Twitter') }} </a>
                             </li>
-                            <li><a href="#" target="_blank"><i class="fab fa-linkedin me-2"></i> Linkedin</a>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin me-2"></i>{{ __('message.Linkedin') }} </a>
                             </li>
-                            <li><a href="#" target="_blank"><i class="fab fa-instagram me-2"></i> Instagram</a>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram me-2"></i>{{ __('message.Instagram') }} </a>
                             </li>
                         </ul>
                     </div>
@@ -143,16 +153,16 @@ $setting = \App\Models\Settings::query()->first();
                 <div class="row">
                     <div class="col-md-6 col-lg-6">
                         <div class="copyright-text">
-                            <p class="mb-0">&copy; {{date("Y")}} {{ $setting->website_name??'' }}. All rights reserved.</p>
+                            <p class="mb-0">&copy; {{date("Y")}} {{ $setting->website_name??'' }}. {{ __('message.All rights reserved') }}.</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <!-- Copyright Menu -->
                         <div class="copyright-menu">
                             <ul class="policy-menu">
-                                <li><a href="#">Terms and Conditions</a>
+                                <li><a href="#">{{ __('message.Terms and Conditions') }}</a>
                                 </li>
-                                <li><a href="#">Policy</a>
+                                <li><a href="#"> {{ __('message.Policy') }}</a>
                                 </li>
                             </ul>
                         </div>

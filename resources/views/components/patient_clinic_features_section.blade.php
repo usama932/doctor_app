@@ -1,13 +1,23 @@
+
+@php
+if(!empty(Session::get('locale')))
+    {
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
 <div>
     <section class="features-clinic-four">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-header-four text-center aos" data-aos="fade-up">
-                        <h2 class="title-four">Available Features <span class="color-primary">in Our Clinic</span>
+                        <h2 class="title-four">{{ __('message.Available Features') }} <span class="color-primary"> {{ __('message.in Our Clinic') }}</span>
                         </h2>
-                        <p class="sub-title color-grey">It is a long established fact that a reader will be
-                            distracted by the readable content of a page when looking at its layout.</p>
+                        <p class="sub-title color-grey">{{ __('message.feature_text') }}</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +80,7 @@
                             <div class="owl-nav slide-nav-8 nav-control"></div>
                             <div class="float-end">
                                 <div class="text-end">
-                                    <a href="#" class="btn btn-one">View More</a>
+                                    <a href="#" class="btn btn-one">{{ __('message.View More') }}</a>
                                 </div>
                             </div>
                         </div>

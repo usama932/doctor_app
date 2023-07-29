@@ -1,5 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+
+@php
+
+if(!empty(Session::get('locale')))
+    {
+        $lang = Session::get('locale');
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
+<html lang="en"></html>
 <head>
     @include('layout.partials.head')
     @stack('styles')

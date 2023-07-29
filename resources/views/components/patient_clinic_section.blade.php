@@ -1,10 +1,20 @@
+@php
+if(!empty(Session::get('locale')))
+    {
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
 <div>
     <section class="clinic-section-four">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-header-four text-center aos" data-aos="fade-up">
-                        <h2>Clinic & <span class="color-primary">Specialities</span></h2>
+                        <h2> {{ __('message.Clinic &') }}<span class="color-primary">  {{ __('message.Specialities') }}</span></h2>
                         <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                             tempor incididunt ut labore et dolore magna aliqua.</p>
                     </div>

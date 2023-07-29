@@ -1,12 +1,22 @@
+
+@php
+if(!empty(Session::get('locale')))
+    {
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
 <div>
     <section class="doctor-section-four">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-header-four text-center aos aos-init aos-animate" data-aos="fade-up">
-                        <h2 class="title-four">Book Our <span class="color-primary">Best Doctor</span></h2>
-                        <p class="sub-title color-grey">Access to expert physicians and surgeons, advanced
-                            technologies and top-quality surgery facilities right here.</p>
+                        <h2 class="title-four"> {{ __('message.Book Our') }} <span class="color-primary">{{ __('message.Best Doctor') }}</span></h2>
+                        <p class="sub-title color-grey">{{ __('message.client_Text') }}</p>
                     </div>
                 </div>
             </div>

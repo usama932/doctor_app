@@ -1,12 +1,21 @@
+@php
+if(!empty(Session::get('locale')))
+    {
+        app()->setLocale(Session::get('locale'));
+    }
+
+    else{
+         app()->setLocale('en');
+    }
+@endphp
 <div>
     <section class="blog-section-four">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-header-four text-center aos" data-aos="fade-up">
-                        <h2 class="title-four">Our Latest <span class="color-primary">Blogs</span></h2>
-                        <p class="sub-title color-grey">It is a long established fact that a reader will be
-                            distracted by the readable content of a page when looking at its layout.</p>
+                        <h2 class="title-four"> {{ __('message.Our Latest') }}<span class="color-primary">{{ __('message.Blogs') }}</span></h2>
+                        <p class="sub-title color-grey">{{ __('message.blog_text') }}.</p>
                     </div>
                 </div>
             </div>
@@ -145,7 +154,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <a href="{{ route('blog-list') }}" class="btn btn-one">View More</a>
+                <a href="{{ route('blog-list') }}" class="btn btn-one"> {{ __('message.View More') }}</a>
             </div>
         </div>
     </section>
