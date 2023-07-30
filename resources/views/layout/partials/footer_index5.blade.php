@@ -1,6 +1,4 @@
-@php
-$setting = \App\Models\Settings::query()->first();
-@endphp
+
 @php
 if(!empty(Session::get('locale')))
     {
@@ -9,6 +7,7 @@ if(!empty(Session::get('locale')))
     }
 
     else{
+        $lang = '';
          app()->setLocale('en');
     }
 @endphp

@@ -8,6 +8,7 @@ if(!empty(Session::get('locale')))
     }
 
     else{
+        $lang = '';
          app()->setLocale('en');
     }
 @endphp
